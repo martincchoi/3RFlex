@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Middle School Friday 3R Flex Circles</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #3b82f6;
+      --primary-bg: #eff6ff;
+      --text-dark: #0f172a;
+      --text-muted: #475569;
+      --bg-main: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --accent-badge: #dbeafe;
+      --accent-badge-text: #1e40af;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-dark);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Policy Rules Box */
+    .rules-card {
+      background: white;
+      border-left: 5px solid var(--primary-light);
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 30px;
+    }
+
+    .rules-card h2 {
+      font-size: 1.25rem;
+      color: var(--primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .rules-card ul {
+      list-style-type: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .rules-card ul {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .rules-card li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .rules-card li::before {
+      content: "•";
+      color: var(--primary-light);
+      font-weight: bold;
+      font-size: 1.2rem;
+      position: absolute;
+      left: 0;
+      top: -2px;
+    }
+
+    .rules-card strong {
+      color: var(--text-dark);
+    }
+
+    /* Navigation Tabs */
+    .tabs-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 25px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 10px;
+    }
+
+    .tab-btn {
+      background: white;
+      border: 1px solid var(--border-color);
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      background: var(--primary-bg);
+      color: var(--primary);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Cards Grid */
+    .circle-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .circle-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .circle-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .category-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary-light);
+      margin-bottom: 6px;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .meta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 12px;
+      background: #f1f5f9;
+      color: var(--text-muted);
+    }
+
+    .pill.grade {
+      background: var(--accent-badge);
+      color: var(--accent-badge-text);
+    }
+
+    .card p.description {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      flex-grow: 1;
+      white-space: pre-line;
+    }
+
+    .card-footer {
+      border-top: 1px solid #f1f5f9;
+      padding-top: 12px;
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Middle School Friday 3R Flex Circles</h1>
+    <p>Explore options, find your interest, and discover what’s available for each quarter.</p>
+  </header>
+
+  <div class="container">
+    
+    <!-- Guidelines / Policy Box -->
+    <div class="rules-card">
+      <h2>📌 Important Rules & Guidelines</h2>
+      <ul>
+        <li><strong>Default Placement:</strong> 3R Study Hall for relearn/reassessment is the default placement if choices aren't submitted or when not in a circle.</li>
+        <li><strong>Academic Priority:</strong> Academic relearning/reassessments always take precedence over Flex Circles upon teacher request.</li>
+        <li><strong>Commitment:</strong> Choose only if you intend to actively participate. Circle leaders may request removals for disrespect or distraction.</li>
+        <li><strong>Switching Policy:</strong> No switching between circles once assigned. Drops allowed only after Session 1 via email to Mr. Choi with a valid reason.</li>
+      </ul>
+    </div>
+
+    <!-- Quarter Selector Tabs -->
+    <div class="tabs-container">
+      <button class="tab-btn active" onclick="switchTab('q2')">Quarter 2</button>
+      <button class="tab-btn" onclick="switchTab('q3')">Quarter 3</button>
+      <button class="tab-btn" onclick="switchTab('q4')">Quarter 4</button>
+    </div>
+
+    <!-- Quarter 2 Content -->
+    <div id="q2" class="tab-content active">
+      <div class="circle-grid">
+        
+        <div class="card">
+          <div>
+            <div class="category-tag">🎨 Creative Arts</div>
+            <h3>The Calm Creative Classroom</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">Need a break from the busy school day? This Flex class is your chance to relax, recharge, and get creative! You can enjoy activities like watercolor painting, card making, and other creative projects. No artistic skills are needed—just bring your creativity.</p>
+          </div>
+          <div class="card-footer">Leader: Erika New</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🎨 Creative Arts</div>
+            <h3>Three-Panel Comics</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 10–15</span>
+            </div>
+            <p class="description">Students will learn the form and theory behind the three-panel comic form. We will then work on drafting, editing, illustrating, and publishing a collection of our work.</p>
+          </div>
+          <div class="card-footer">Leader: Timothy Stewart</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🎨 Creative Arts</div>
+            <h3>Photography Design and Storytelling</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: Flexible</span>
+            </div>
+            <p class="description">This class will teach students how to take a better picture. Anyone can pick up a phone and snap a pic. True photographers know what to look for, how to design a shot, and use it to tell a story.</p>
+          </div>
+          <div class="card-footer">Leader: John (Phillip) Shrier</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🎵 Music & Performing</div>
+            <h3>Flute</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">We will work on the foundations of flute playing like tone, breath control, tonguing, fingerings. We will work our way through the major and minor scales; learn some basic music theory; and have fun playing solos, duets, and flute choir arrangements together. (Note: Instrument required)</p>
+          </div>
+          <div class="card-footer">Leader: Julie Flaming</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🎵 Music & Performing</div>
+            <h3>Chapel Vocals</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All (No 6th until S2)</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">This Flex Circle is for ALL students who plan on singing in chapel band this quarter. This is not required for instrumentalists. Students will meet in Mrs. Ernst's room to prepare vocally for the following week's group rehearsal.</p>
+          </div>
+          <div class="card-footer">Leaders: Rachel Ernst & Jessica Ridgely</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">📖 Literature</div>
+            <h3>Short Story and Drama Reading</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 10–15</span>
+            </div>
+            <p class="description">We could read a short story together and then discuss it with any remaining time. With dramas, we could have a reader's theater and read the different parts of the play.</p>
+          </div>
+          <div class="card-footer">Leader: Stephani Clouser</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🏃 Active & Outdoor</div>
+            <h3>Adventure & Survival Skills</h3>
+            <div class="meta-pills">
+              <span class="pill grade">6th & 7th Grade</span>
+              <span class="pill">Capacity: 10–15</span>
+            </div>
+            <p class="description">🔥 READY FOR AN ADVENTURE? 🔥
+Join Mr. Reinoso for a Survival Skills Intensive filled with real adventure stories, exciting challenges, and unexpected survival situations! Learn to stay calm, think smart, and work as a team.</p>
+          </div>
+          <div class="card-footer">Leader: Agustin Reinoso</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🤝 Community & Impact</div>
+            <h3>Living on One $</h3>
+            <div class="meta-pills">
+              <span class="pill grade">7th & 8th Grade</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">We will explore the concept of poverty and discuss how we can thoughtfully address global social injustice through film discussions and planning action-oriented awareness/fundraising projects.</p>
+          </div>
+          <div class="card-footer">Leader: Martin Choi</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🤝 Community & Impact</div>
+            <h3>Student Council (StuCo)</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">Participate in Student Council leadership, project planning, and student advocacy.</p>
+          </div>
+          <div class="card-footer">Leader: Claire Brodie</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🤝 Community & Impact</div>
+            <h3>RISE Peer Pods</h3>
+            <div class="meta-pills">
+              <span class="pill grade">6th & 7th, Open to All</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">Join RISE Classroom Students for peer connection and learning time! Includes weekly activities like crafts, games, team challenges, snack prep, and building friendships across all abilities.</p>
+          </div>
+          <div class="card-footer">Leader: Allyson Amstutz</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🤝 Community & Impact</div>
+            <h3>American Sign Language</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: Flexible</span>
+            </div>
+            <p class="description">Learn American Sign Language!</p>
+          </div>
+          <div class="card-footer">Leader: Rachel Shrier</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Quarter 3 Content -->
+    <div id="q3" class="tab-content">
+      <div class="circle-grid">
+        
+        <div class="card">
+          <div>
+            <div class="category-tag">🎨 Creative Arts</div>
+            <h3>Photography Design and Storytelling</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: Flexible</span>
+            </div>
+            <p class="description">This class will teach students how to take a better picture. True photographers know what to look for, how to design a shot, and use it to tell a story.</p>
+          </div>
+          <div class="card-footer">Leader: John (Phillip) Shrier</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🎵 Music & Performing</div>
+            <h3>Flute</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">Foundations of flute playing, scales, music theory, solos, duets, and flute choir arrangements together. (Note: Instrument required)</p>
+          </div>
+          <div class="card-footer">Leader: Julie Flaming</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🎵 Music & Performing</div>
+            <h3>Chapel Vocals</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">Vocal preparation for students planning to sing in chapel band this quarter.</p>
+          </div>
+          <div class="card-footer">Leaders: Rachel Ernst & Jessica Ridgely</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🎵 Music & Performing</div>
+            <h3>Sing Along with Thai Songs</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 10–15</span>
+            </div>
+            <p class="description">We will sing Thai songs, especially Thai Worship Songs. We can find peace and rest in God through worship together as well as learn new Thai words through the songs.</p>
+          </div>
+          <div class="card-footer">Leader: Patcharaporn Suwan</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">📖 Literature</div>
+            <h3>Book Club</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">Students will meet to discuss chapters of a book read together, share book recommendations, and get to know our library better.</p>
+          </div>
+          <div class="card-footer">Leader: Kara Hallead</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">📖 Literature</div>
+            <h3>Short Story and Drama Reading</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 10–15</span>
+            </div>
+            <p class="description">Read and discuss short stories together or participate in reader's theater for plays.</p>
+          </div>
+          <div class="card-footer">Leader: Stephani Clouser</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">💻 STEM & Tech</div>
+            <h3>Self Paced Introduction to Game Lab</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">Program animations, interactive art, and games using JavaScript via Game Lab in Code.org.</p>
+          </div>
+          <div class="card-footer">Leader: Martin Choi</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🏃 Active & Outdoor</div>
+            <h3>Floor Hockey</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 10–15</span>
+            </div>
+            <p class="description">Play floor hockey on the middle school basketball court. Sticks and balls provided.</p>
+          </div>
+          <div class="card-footer">Leader: Nick Windschitl</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🏃 Active & Outdoor</div>
+            <h3>Adventure & Survival Skills</h3>
+            <div class="meta-pills">
+              <span class="pill grade">6th & 7th Grade</span>
+              <span class="pill">Capacity: 10–15</span>
+            </div>
+            <p class="description">Survival Skills Intensive filled with real adventure stories, exciting challenges, and unexpected survival situations!</p>
+          </div>
+          <div class="card-footer">Leader: Agustin Reinoso</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🤝 Community & Impact</div>
+            <h3>Student Council (StuCo)</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">Participate in Student Council activities and initiatives.</p>
+          </div>
+          <div class="card-footer">Leader: Claire Brodie</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🤝 Community & Impact</div>
+            <h3>RISE Peer Pods</h3>
+            <div class="meta-pills">
+              <span class="pill grade">6th & 7th, Open to All</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">Weekly peer connection activities, crafts, games, snack prep, and building friendships.</p>
+          </div>
+          <div class="card-footer">Leader: Allyson Amstutz</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🤝 Community & Impact</div>
+            <h3>American Sign Language</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: Flexible</span>
+            </div>
+            <p class="description">Learn American Sign Language!</p>
+          </div>
+          <div class="card-footer">Leader: Rachel Shrier</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Quarter 4 Content -->
+    <div id="q4" class="tab-content">
+      <div class="circle-grid">
+        
+        <div class="card">
+          <div>
+            <div class="category-tag">🎨 Creative Arts</div>
+            <h3>The Calm Creative Classroom</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">Relax, recharge, and get creative with watercolor painting, card making, and creative projects.</p>
+          </div>
+          <div class="card-footer">Leader: Erika New</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🎨 Creative Arts</div>
+            <h3>Photography Design and Storytelling</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: Flexible</span>
+            </div>
+            <p class="description">Learn how to design a photo shot and tell visual stories.</p>
+          </div>
+          <div class="card-footer">Leader: John (Phillip) Shrier</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🎵 Music & Performing</div>
+            <h3>Flute</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">Foundations of flute playing, scales, music theory, and group arrangements. (Note: Instrument required)</p>
+          </div>
+          <div class="card-footer">Leader: Julie Flaming</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🎵 Music & Performing</div>
+            <h3>Chapel Vocals</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">Vocal preparation for students singing in chapel band.</p>
+          </div>
+          <div class="card-footer">Leaders: Rachel Ernst & Jessica Ridgely</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🎵 Music & Performing</div>
+            <h3>Sing Along with Thai Songs</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 10–15</span>
+            </div>
+            <p class="description">Sing Thai songs and Thai Worship Songs to find peace and rest while learning new Thai vocabulary.</p>
+          </div>
+          <div class="card-footer">Leader: Patcharaporn Suwan</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">📖 Literature</div>
+            <h3>Book Club</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">Read chapters together, discuss books, and share reading recommendations.</p>
+          </div>
+          <div class="card-footer">Leader: Kara Hallead</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">💻 STEM & Tech</div>
+            <h3>Artificial Intelligence Discoveries</h3>
+            <div class="meta-pills">
+              <span class="pill grade">6th Grade</span>
+              <span class="pill">Capacity: Flexible</span>
+            </div>
+            <p class="description">Get ready to explore the world of AI! Hands-on challenges using AI to create, code, design, solve problems, spot misinformation, and use AI responsibly.</p>
+          </div>
+          <div class="card-footer">Leader: Marcus Fey</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🤝 Community & Impact</div>
+            <h3>Student Council (StuCo)</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">Participate in Student Council activities and campus leadership.</p>
+          </div>
+          <div class="card-footer">Leader: Claire Brodie</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🤝 Community & Impact</div>
+            <h3>RISE Peer Pods</h3>
+            <div class="meta-pills">
+              <span class="pill grade">6th & 7th, Open to All</span>
+              <span class="pill">Capacity: 5–10</span>
+            </div>
+            <p class="description">Peer connection activities, crafts, games, snack prep, and building friendships with RISE classroom students.</p>
+          </div>
+          <div class="card-footer">Leader: Allyson Amstutz</div>
+        </div>
+
+        <div class="card">
+          <div>
+            <div class="category-tag">🤝 Community & Impact</div>
+            <h3>American Sign Language</h3>
+            <div class="meta-pills">
+              <span class="pill grade">Open to All</span>
+              <span class="pill">Capacity: Flexible</span>
+            </div>
+            <p class="description">Learn American Sign Language!</p>
+          </div>
+          <div class="card-footer">Leader: Rachel Shrier</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function switchTab(quarterId) {
+      // Hide all contents
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+
+      // Deactivate all buttons
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      // Activate selected tab & button
+      document.getElementById(quarterId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+  </script>
+</body>
+</html>
